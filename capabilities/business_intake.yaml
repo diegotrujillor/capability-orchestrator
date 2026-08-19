@@ -1,0 +1,26 @@
+id: business_intake
+description: Normalize raw business/product/support input into a structured request.
+inputs:
+  required: [raw_request]
+  optional: [audio_transcript, screenshots, links, requester]
+models:
+  normalization:
+    candidates: [generalist, budget-reasoning]
+  clarification:
+    candidates: [generalist]
+tools:
+  required: [file]
+  optional: [vision, session_search]
+outputs:
+  - request.yaml
+  - facts_and_unknowns.md
+  - open_questions.md
+rules:
+  - Preserve original wording and source references.
+  - Do not convert assumptions into facts.
+  - Extract client, domain, module, environment, people, dates, and links when present.
+  - Ask for missing business-critical inputs only after extracting what is already available.
+metrics:
+  - extraction_completeness
+  - human_score
+  - review_rework_pct  # porcentaje del resultado que tuvo que cambiarse después de revisión humana

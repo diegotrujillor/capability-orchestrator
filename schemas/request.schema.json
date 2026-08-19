@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Capability Router Request",
+  "type": "object",
+  "required": ["title", "source", "raw_request"],
+  "properties": {
+    "title": {"type": "string"},
+    "source": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {"enum": ["manual", "chat", "email", "meeting", "ticket", "spreadsheet", "repository", "other"]},
+        "raw_refs": {"type": "array", "items": {"type": "string"}},
+        "requester": {"type": "string"}
+      }
+    },
+    "business_context": {
+      "type": "object",
+      "properties": {
+        "client": {"type": "string"},
+        "domain": {"type": "string"},
+        "module": {"type": "string"},
+        "environment": {"type": "string"}
+      }
+    },
+    "raw_request": {"type": "string"},
+    "attachments": {"type": "array", "items": {"type": "string"}},
+    "desired_outcome": {"type": "string"},
+    "constraints": {"type": "array", "items": {"type": "string"}},
+    "known_people": {"type": "array", "items": {"type": "string"}}
+  }
+}
