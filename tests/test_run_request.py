@@ -16,9 +16,9 @@ class RunRequestTest(unittest.TestCase):
             input_dir.mkdir(parents=True)
             (input_dir / "input-1.md").write_text(
                 """
-                Reunión sobre la propuesta de rediseño del generador de documentos.
-                El sistema actual tiene queries grandes y acopladas por plantilla.
-                Se propone separar Template Field Extractor, Field Formatter y Data Query Builder.
+                Nota sobre la propuesta de rediseño del servicio de notificaciones.
+                El diseño actual tiene mucho acoplamiento entre sus componentes.
+                Se propone un refactor por capas para mejorar la escalabilidad.
                 Hay deuda técnica acumulada. No tocar producto todavía.
                 """,
                 encoding="utf-8",
