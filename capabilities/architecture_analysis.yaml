@@ -1,0 +1,29 @@
+id: architecture_analysis
+description: Produce solution architecture, ADRs, plans, risks, and lean architecture repos.
+inputs:
+  required: [structured_request]
+  optional: [meeting_notes, screenshots, source_repos, product_context]
+models:
+  exploration:
+    candidates: [budget-reasoning, generalist]
+  critique:
+    candidates: [generalist]
+  final:
+    candidates: [deep-reasoning, generalist]
+tools:
+  required: [vcs, file, terminal]
+  optional: [code_graph, metrics_tracker]
+outputs:
+  - README.md
+  - ADR.md
+  - PLAN-v1.0.md
+  - VALIDATION.md
+rules:
+  - Discovery first; do not write final plan before approval.
+  - Keep unverified items in an explicit bucket.
+  - Prefer lean final repos over verbose historical analysis.
+metrics:
+  - human_score
+  - review_rework_pct  # porcentaje del resultado que tuvo que cambiarse después de revisión humana
+  - architecture_repo_created
+  - accepted

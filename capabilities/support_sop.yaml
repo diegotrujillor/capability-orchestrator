@@ -1,0 +1,26 @@
+id: support_sop
+description: Convert technical flow into support-friendly SOP (Standard Operating Procedure / procedimiento operativo estándar).
+inputs:
+  required: [technical_summary]
+  optional: [endpoint, permissions, environment_urls, common_errors]
+models:
+  draft:
+    candidates: [generalist]
+  concise_review:
+    candidates: [generalist, deep-reasoning]
+tools:
+  required: [file]
+  optional: [vcs, terminal]
+outputs:
+  - SOP.md  # Standard Operating Procedure / procedimiento operativo estándar
+  - quick_checklist.md
+rules:
+  - Never include secrets.
+  - State required permissions or aliases.
+  - Include environment-specific caveats.
+  - Include success and failure examples.
+metrics:
+  - support_ready
+  - human_score
+  - review_rework_pct  # porcentaje del resultado que tuvo que cambiarse después de revisión humana
+  - incidents_after_publication

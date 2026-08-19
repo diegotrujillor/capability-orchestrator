@@ -1,0 +1,118 @@
+version: 1
+
+# Este archivo mantiene dos capas separadas:
+# 1. catálogo de modelos concretos, agrupados por perfil de capacidad;
+# 2. routing deseado por rol, expresado en perfiles y no en marcas.
+#
+# No es todavía un motor runtime de selección automática. Es metadata auditable
+# para que el agente y los scripts puedan decidir sin adivinar provider,
+# model_id o credencial.
+#
+# Para adaptarlo a tu entorno: cambia solo el bloque `models`. El bloque
+# `roles` no debería necesitar cambios cuando cambia el catálogo de modelos.
+
+models:
+  generalist:
+    description: Modelo generalista fuerte para orquestación, investigación y síntesis.
+    provider: null          # p. ej. openai | anthropic | google | local
+    model_id: null          # p. ej. el identificador exacto del proveedor
+    credential: null        # p. ej. OPENAI_API_KEY
+    readiness:
+      status: unknown       # ready | blocked | missing_key | unknown
+      checked_at: null
+      reason: Sin configurar. Definir provider, model_id y credencial antes de usar.
+
+  deep-reasoning:
+    description: Razonamiento largo para arquitectura, ADRs y trade-offs.
+    provider: null
+    model_id: null
+    credential: null
+    readiness:
+      status: unknown
+      checked_at: null
+      reason: Sin configurar. Definir provider, model_id y credencial antes de usar.
+
+  coding:
+    description: Modelo especializado en generar y modificar código con tests.
+    provider: null
+    model_id: null
+    credential: null
+    readiness:
+      status: unknown
+      checked_at: null
+      reason: Sin configurar. Definir provider, model_id y credencial antes de usar.
+
+  budget-reasoning:
+    description: Razonamiento aceptable a bajo costo, para exploración y fallback.
+    provider: null
+    model_id: null
+    credential: null
+    readiness:
+      status: unknown
+      checked_at: null
+      reason: Sin configurar. Definir provider, model_id y credencial antes de usar.
+
+  human-review:
+    description: Revisión humana como fallback no-modelo.
+    provider: manual
+    model_id: human-review
+    credential: none
+    readiness:
+      status: ready
+      checked_at: null
+      reason: La revisión manual siempre está disponible como fallback.
+
+roles:
+  orchestration:
+    purpose: classify request, choose route, ask for approval
+    primary: generalist
+    fallback: human-review
+
+  architecture:
+    purpose: solution design, ADRs, plans, trade-offs
+    primary: deep-reasoning
+    secondary: generalist
+    fallback: budget-reasoning
+
+  implementation:
+    purpose: code, tests, branches, pull requests
+    primary: coding
+    secondary: generalist
+    fallback: human-review
+
+  research:
+    purpose: compare alternatives, validate hypotheses, synthesize
+    primary: generalist
+    secondary: budget-reasoning
+    fallback: deep-reasoning
+
+  qa_diagnosis:
+    purpose: root-cause analysis and bug diagnosis
+    primary: generalist
+    secondary: budget-reasoning
+    fallback: coding
+
+  support_sop:
+    purpose: clear SOPs, support procedures and handoff docs
+    primary: generalist
+    secondary: deep-reasoning
+    fallback: human-review
+
+routing_policy:
+  use_ready_model_only: true
+  if_primary_unavailable: try_secondary
+  if_secondary_unavailable: try_fallback
+  if_no_model_ready: require_human_review
+  do_not_silently_use_blocked_model: true
+  readiness_statuses:
+    ready: usable
+    blocked: configured_but_not_usable
+    missing_key: not_usable
+    unknown: require_verification
+
+metrics:
+  - cost_usd
+  - latency_sec
+  - human_score
+  - review_rework_pct  # porcentaje del resultado que tuvo que cambiarse después de revisión humana
+  - accepted

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Capability Router Human Review",
+  "type": "object",
+  "required": ["accepted", "human_score", "review_rework_pct"],
+  "properties": {
+    "accepted": {"type": "boolean"},
+    "human_score": {"type": "number", "minimum": 0, "maximum": 10},
+    "review_rework_pct": {"type": "number", "minimum": 0, "maximum": 100, "description": "Porcentaje del resultado que tuvo que cambiarse después de revisión humana"},
+    "comments": {"type": "array", "items": {"type": "string"}},
+    "reusable_lessons": {"type": "array", "items": {"type": "string"}},
+    "follow_up_actions": {"type": "array", "items": {"type": "string"}},
+    "metrics_run_url": {"type": "string"},
+    "architecture_repo_url": {"type": "string"}
+  }
+}

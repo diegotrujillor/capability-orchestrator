@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+.venv/
+venv/
+.env
+
+# Material real de solicitudes: nunca debe llegar a un repo público.
+inputs/inbox/*
+!inputs/inbox/.gitkeep
+runs/*
+!runs/.gitkeep
+!runs/README.md

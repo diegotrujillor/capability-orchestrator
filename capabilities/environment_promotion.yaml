@@ -1,0 +1,30 @@
+id: environment_promotion
+description: Promote or reconcile selected commits across develop/qa/staging/main safely.
+inputs:
+  required: [source_commit_or_pr, target_branches]
+  optional: [deployment_order, dependent_repos]
+models:
+  analysis:
+    candidates: [generalist]
+  implementation:
+    candidates: [coding, generalist]
+tools:
+  required: [git, vcs, terminal]
+outputs:
+  - drift_report.md
+  - target_branches
+  - pull_requests
+  - deployment_order.md
+rules:
+  - Do not assume full develop to qa/staging merge is safe.
+  - Branch from each target environment branch.
+  - Cherry-pick only approved commits.
+  - Deploy DB before API when dependent.
+  - Reconcile PRD hotfixes back to active branches.
+metrics:
+  - branches_created
+  - prs_created
+  - conflicts
+  - validation_passed
+  - human_score
+  - review_rework_pct  # porcentaje del resultado que tuvo que cambiarse después de revisión humana

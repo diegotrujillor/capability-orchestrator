@@ -1,0 +1,36 @@
+id: qa_bug_diagnosis
+description: Analyze QA/product bug reports and produce verified root cause.
+inputs:
+  required:
+    - raw_request
+  optional:
+    - screenshots
+    - spreadsheet_links
+    - repo_links
+    - environment
+models:
+  exploration:
+    candidates: [budget-reasoning, generalist]
+  verification:
+    candidates: [generalist]
+  implementation:
+    candidates: [coding]
+tools:
+  required: [vcs, git, file_search, terminal]
+  optional: [code_graph, db_readonly]
+outputs:
+  - facts_and_unknowns.md
+  - root_cause.md
+  - proposed_next_action.md
+  - human_review.yaml
+rules:
+  - Separate module fronts even when input mixes them.
+  - Keep confirmed facts and assumptions in different sections.
+  - Validate against code, BPMN, SQL, or deployed behavior before closing.
+metrics:
+  - cost_usd
+  - latency_sec
+  - source_files_inspected
+  - human_score
+  - review_rework_pct  # porcentaje del resultado que tuvo que cambiarse después de revisión humana
+  - accepted
