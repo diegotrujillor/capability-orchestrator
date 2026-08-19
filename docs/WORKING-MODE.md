@@ -1,8 +1,8 @@
-# Modo de trabajo con Capability Router
+# Modo de trabajo con Capability Orchestrator
 
 ## Propósito
 
-Este documento resume cómo usar `capability-router` como fábrica de trabajo para solicitudes entrantes.
+Este documento resume cómo usar `capability-orchestrator` como fábrica de trabajo para solicitudes entrantes.
 
 La idea no es guardar toda la operación dentro de este repo. La idea es usar este repo para convertir material disperso en una ruta clara, trazable y aprobable.
 
@@ -67,7 +67,7 @@ Fase 5: Implementación aprobada
 
 ## Fase 0: Intake, clasificación y decisión de destino
 
-Esta fase ocurre en `capability-router`.
+Esta fase ocurre en `capability-orchestrator`.
 
 Objetivo: convertir archivos dispersos en una solicitud entendible y una ruta recomendada.
 
@@ -278,7 +278,7 @@ Esto aplica para:
 ## Mensaje sugerido para usar con el agente
 
 ```text
-Usa capability-router para este nuevo requerimiento.
+Usa capability-orchestrator para este nuevo requerimiento.
 Crea el intake inicial, clasifica la capacidad, lista hechos/supuestos/preguntas y recomienda dónde debería vivir el trabajo.
 No crees repos, issues, branches ni PRs hasta que yo apruebe el destino.
 

@@ -4,7 +4,7 @@ Documentos para compartir el modo de trabajo del orquestador con un equipo.
 
 ## Quién lo usa / ejecuta
 
-- Personas del equipo que quieren entender cómo usar `capability-router`.
+- Personas del equipo que quieren entender cómo usar `capability-orchestrator`.
 - El agente cuando necesita explicar o presentar el flujo de trabajo.
 
 ## Orden lógico
