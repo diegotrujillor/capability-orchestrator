@@ -93,7 +93,7 @@ def infer_title(material: InputMaterial, case_id: str) -> str:
 
 def infer_primary_capability(material: InputMaterial) -> str:
     combined = f"{material.text}\n{material.slide_text}".lower()
-    architecture_terms = ["arquitectura", "propuesta", "deuda técnica", "query", "queries", "builder", "extractor", "formatter"]
+    architecture_terms = ["arquitectura", "diseño", "rediseño", "propuesta", "refactor", "acoplamiento", "componentes", "deuda técnica", "escalabilidad"]
     bug_terms = ["error", "qa", "bug", "falla", "no descarga", "traceback"]
     sop_terms = ["procedimiento", "paso a paso", "soporte", "operación"]
     if sum(term in combined for term in architecture_terms) >= 2:
@@ -184,7 +184,7 @@ def ensure_request(case_id: str, input_dir: Path | None, input_file: Path | None
 
 def extract_people(text: str) -> list[str]:
     candidates = re.findall(r"\b[A-ZÁÉÍÓÚÑ][a-záéíóúñ]{2,}\b", text)
-    ignored = {"Reunión", "Material", "Texto", "Slide", "Template", "Field", "Data", "Query", "Builder", "Formatter", "Extractor"}
+    ignored = {"Reunión", "Material", "Texto", "Slide", "Nota", "Correo", "Ticket", "Documento", "Anexo", "Resumen", "Solicitud"}
     names: list[str] = []
     for candidate in candidates:
         if candidate not in ignored and candidate not in names:
@@ -212,7 +212,7 @@ def facts_for(primary: str, material: InputMaterial) -> tuple[list[str], list[st
         ])
 
     detected_terms = []
-    for term in ["arquitectura", "propuesta", "deuda técnica", "query", "queries", "builder", "extractor", "formatter", "error", "qa", "bug", "procedimiento", "soporte"]:
+    for term in ["arquitectura", "diseño", "rediseño", "propuesta", "refactor", "acoplamiento", "componentes", "deuda técnica", "escalabilidad", "error", "qa", "bug", "procedimiento", "soporte"]:
         if term in combined and term not in detected_terms:
             detected_terms.append(term)
     if detected_terms:
@@ -252,7 +252,7 @@ def write_outputs(case_id: str, output_root: Path, request_path: Path | None, ma
 
 ## Resultado esperado del dry-run
 
-Generar intake estructurado, clasificación, hechos/preguntas, ruta recomendada y plantilla de revisión humana.
+Generar intake estructurado, clasificación, hechos/preguntas, ruta recomendada y formato de revisión humana.
 
 ## Request base
 
