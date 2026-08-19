@@ -8,7 +8,7 @@ El objetivo del changelog no es reemplazar Git, sino explicar por qué cambió e
 
 ### Agregado
 
-- Publicación inicial de `capability-router` como arquitectura reusable y agnóstica para orquestar solicitudes entrantes.
+- Publicación inicial de `capability-orchestrator` como arquitectura reusable y agnóstica para orquestar solicitudes entrantes.
 - Definición de la visión central: un orquestador de capacidades, no un único modelo que responde a todo.
 - Taxonomía de capacidades en `capabilities/*.yaml`: `business_intake`, `qa_bug_diagnosis`, `architecture_analysis`, `support_sop`, `environment_promotion`.
 - Contratos de entrada y revisión humana en `schemas/`.

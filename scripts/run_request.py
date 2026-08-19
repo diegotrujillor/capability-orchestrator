@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Dry-run runner for the Capability Router MVP.
+"""Dry-run runner for the Capability Orchestrator MVP.
 
 This runner is intentionally deterministic and local-only. It reads raw files,
 builds/uses request.md, writes runs/<case-id>/ outputs, and never creates PRs,

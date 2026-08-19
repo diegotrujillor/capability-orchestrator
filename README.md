@@ -1,4 +1,4 @@
-# Capability Router
+# Capability Orchestrator
 
 Orquestador de solicitudes basado en capacidades: convierte peticiones crudas de producto, QA, soporte o negocio en casos trazables y reutilizables.
 
